@@ -9,9 +9,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-
-
 import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -185,10 +184,10 @@ private boolean End = false;
     
 
           // Set the motor speed based on trigger values
-          if (Driver.getRightTriggerAxis() > 0.1) {
+          if (Operater.getRightTriggerAxis() > 0.1) {
             // Move motor forward
             ballMotor.set(-.6); // Scale speed down to 50%
-        } else if (Driver.getLeftTriggerAxis() > 0.05) {
+        } else if (Operater.getLeftTriggerAxis() > 0.05) {
             // Move motor backward
             ballMotor.set(.6); // Scale speed down to 50%
         } else {
@@ -199,10 +198,10 @@ private boolean End = false;
       // Wrist motor control
 
       // Set the motor speed based on trigger values
-      if (Operater.getRightTriggerAxis() > 0.1) {
+      if (Driver.getRightTriggerAxis() > 0.1) {
           // Move motor forward
           cageMotor.set(-.2); // Scale speed down to 50%
-      } else if (Operater.getLeftTriggerAxis() > 0.05) {
+      } else if (Driver.getLeftTriggerAxis() > 0.05) {
           // Move motor backward
           cageMotor.set(.97); // Scale speed down to 50%
       } else {
