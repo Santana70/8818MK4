@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.JogJoint1Command;
+import frc.robot.subsystems.Joint1Subsystem;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
@@ -188,13 +190,16 @@ private boolean End = false;
       // Wrist motor control
 
       // Set the motor speed based on trigger values
-      if (Operater.getRightTriggerAxis() > 0.1) {
+      if (Operater.getAButtonPressed()){
+        cageMotor.set(-.15); 
+      }      
+      else if (Operater.getRightTriggerAxis() > 0.1) {
           // Move motor forward
-          cageMotor.set(-.2); // Scale speed down to 50%
-      } else if (Operater.getLeftTriggerAxis() > 0.05) {
+          cageMotor.set(-.35); // Scale speed down to 50%
+      } else if (Operater.getLeftTriggerAxis() > 0.1) {
           // Move motor backward
-          cageMotor.set(.97); // Scale speed down to 50%
-      } else {
+          cageMotor.set(.8); // Scale speed down to 50%
+      } else if (Operater.getLeftTriggerAxis() < 0.1  && Operater.getRightTriggerAxis() < 0.1 && Operater.getAButtonReleased()){
           // Stop motor
           cageMotor.set(0);
       }
@@ -203,16 +208,16 @@ private boolean End = false;
       // Telescopic arm controls
 
        // Control the motors based on bumper inputs
-       if (Operater.getBButtonPressed()) {
-           // Spin motors forward
-           telescopicMotor.set(.8); // 80% speed forward
-       } else if (Operater.getAButtonPressed() ) {
-           // Spin motors backward
-           telescopicMotor.set(-.8); // 80% speed backward
-       } else if (Operater.getAButtonReleased() || Operater.getBButtonReleased()){
-           // Stop motors
-           telescopicMotor.set(0);
-       }
+   //    if (Operater.getBButtonPressed()) {
+   //       // Spin motors forward
+   //        telescopicMotor.set(.8); // 80% speed forward
+   //    } else if (Operater.getAButtonPressed() ) {
+   //        // Spin motors backward
+   //        telescopicMotor.set(-.8); // 80% speed backward
+   //    } else if (Operater.getAButtonReleased() || Operater.getBButtonReleased() ){
+   //        // Stop motors
+   //        telescopicMotor.set(0);
+   //    }
 
 
     //on and off for hang cylinder
@@ -247,9 +252,9 @@ private boolean End = false;
 
     
 
-  if(Operater.getXButtonPressed()){
+  if(Operater.getBButtonPressed()){
 
-      Processor = !Processor;
+    //  Processor = !Processor;
   }  
   if (Processor){
     
@@ -259,9 +264,9 @@ private boolean End = false;
     Ballsolenoid.set(Value.kReverse);
 }
 
-if(Operater.getBButtonPressed()){
+if(Operater.getPOV() == 0){
 
- // ground = !ground;
+ ground = !ground;
 }  
 if (ground){
 

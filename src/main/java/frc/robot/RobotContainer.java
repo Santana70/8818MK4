@@ -192,18 +192,19 @@ public class RobotContainer
     }
 
      // Assign button A (button 1) to set the joint to 90 degrees
-     m_driverController.a().onTrue(new SetJoint1AngleCommand(joint1Subsystem, Rotation2d.fromDegrees(90)));
+  //   m_driverController.a().onTrue(new SetJoint1AngleCommand(joint1Subsystem, Rotation2d.fromDegrees(90)));
      // Assign button B to set the rest angle to 0 degrees
-     m_driverController.b().onTrue(new SetRestAngleCommand(joint1Subsystem, 0.0));
+  //   m_driverController.b().onTrue(new SetRestAngleCommand(joint1Subsystem, 0.0));
      // Assign button Y to set the rest angle to 13 degrees
-     m_driverController.y().onTrue(new SetRestAngleCommand(joint1Subsystem, 30.0));
+  //   m_driverController.y().onTrue(new SetRestAngleCommand(joint1Subsystem, 30.0));
      // Assign button X to reset the encoder
-     m_driverController.x().onTrue(new ResetEncoderCommand(joint1Subsystem));
-     // Assign POV 90 (right) to jog the joint by +5 degrees
-     m_driverController.rightBumper().whileTrue(new JogJoint1Command(joint1Subsystem, 0.95));
-     // Assign POV 270 (left) to jog the joint by -5 degrees
-     m_driverController.leftBumper().whileTrue(new JogJoint1Command(joint1Subsystem, -0.95));
- 
+  //   m_driverController.x().onTrue(new ResetEncoderCommand(joint1Subsystem));
+
+     m_driverController.rightBumper().whileTrue(new JogJoint1Command(joint1Subsystem, 0.6));
+
+     m_driverController.leftBumper().whileTrue(new JogJoint1Command(joint1Subsystem, -0.3));
+
+     m_driverController.a().whileTrue(new JogJoint1Command(joint1Subsystem, 0.4));
   }
 
   public Joint1Subsystem getJoint1Subsystem() {
