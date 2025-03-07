@@ -200,11 +200,11 @@ public class RobotContainer
      // Assign button X to reset the encoder
   //   m_driverController.x().onTrue(new ResetEncoderCommand(joint1Subsystem));
 
-     m_driverController.rightBumper().whileTrue(new JogJoint1Command(joint1Subsystem, 0.6));
+     m_driverController.rightBumper().whileTrue(new JogJoint1Command(joint1Subsystem, 0.4));
 
      m_driverController.leftBumper().whileTrue(new JogJoint1Command(joint1Subsystem, -0.3));
 
-     m_driverController.a().whileTrue(new JogJoint1Command(joint1Subsystem, 0.4));
+     m_driverController.a().whileTrue(new JogJoint1Command(joint1Subsystem, 0.5));
   }
 
   public Joint1Subsystem getJoint1Subsystem() {

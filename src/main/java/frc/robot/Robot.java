@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.JogJoint1Command;
 import frc.robot.subsystems.Joint1Subsystem;
+import edu.wpi.first.wpilibj.Servo;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
@@ -56,7 +57,8 @@ private boolean Processor = false;
 private boolean ground = false;
 private boolean End = false;
 
-
+Servo leftServo = new Servo(7);
+Servo rightServo = new Servo(8);
   public Robot()
   {
     instance = this;
@@ -183,41 +185,49 @@ private boolean End = false;
   @Override
   public void teleopPeriodic()
   {
-    
-
-     
-
-      // Wrist motor control
-
-      // Set the motor speed based on trigger values
-      if (Operater.getAButtonPressed()){
-        cageMotor.set(-.15); 
-      }      
-      else if (Operater.getRightTriggerAxis() > 0.1) {
-          // Move motor forward
-          cageMotor.set(-.35); // Scale speed down to 50%
-      } else if (Operater.getLeftTriggerAxis() > 0.1) {
-          // Move motor backward
-          cageMotor.set(.8); // Scale speed down to 50%
-      } else if (Operater.getLeftTriggerAxis() < 0.1  && Operater.getRightTriggerAxis() < 0.1 && Operater.getAButtonReleased()){
-          // Stop motor
-          cageMotor.set(0);
+         // Flicker Program//
+      if (Operater.getXButton()){
+        leftServo.setPosition(0.);
+        rightServo.setPosition(01.); 
+      
+      } else if (Operater.getBButton()){
+        leftServo.setPosition(01.);
+        rightServo.setPosition(0.); 
       }
+
+
+
+
+ if (Operater.getAButton()){
+          
+      cageMotor.set(-.33);
+      } else  if (Operater.getRightTriggerAxis() > 0.1) {
+      cageMotor.set(-.35); // Scale speed down to 50%
+      }else if (Operater.getLeftTriggerAxis() > 0.1) {
+        // Move motor backward
+        cageMotor.set(.35); // Scale speed down to 50%
+      } else if (Operater.getLeftTriggerAxis() < 0.1  && Operater.getRightTriggerAxis() < 0.1 ){
+        // Stop motor
+        cageMotor.set(0);
+      }
+
 
 
       // Telescopic arm controls
 
        // Control the motors based on bumper inputs
-   //    if (Operater.getBButtonPressed()) {
-   //       // Spin motors forward
-   //        telescopicMotor.set(.8); // 80% speed forward
-   //    } else if (Operater.getAButtonPressed() ) {
-   //        // Spin motors backward
-   //        telescopicMotor.set(-.8); // 80% speed backward
-   //    } else if (Operater.getAButtonReleased() || Operater.getBButtonReleased() ){
-   //        // Stop motors
-   //        telescopicMotor.set(0);
-   //    }
+      // if (Operater.getBButtonPressed()) {
+      //    // Spin motors forward
+      //     telescopicMotor.set(.8); // 80% speed forward
+      // } else if (Operater.getAButtonPressed() ) {
+      //     // Spin motors backward
+      //     telescopicMotor.set(-.8); // 80% speed backward
+      // } else if (Operater.getAButtonReleased() || Operater.getBButtonReleased() ){
+      //     // Stop motors
+      //     telescopicMotor.set(0);
+      // }
+
+   //   telescopicMotor.set(Operater.getLeftY());
 
 
     //on and off for hang cylinder
@@ -272,12 +282,11 @@ if (ground){
 
 Armsolenoid.set(Value.kForward);
 
-} else {
+} else if (Operater.getPOV() == 180){
 Armsolenoid.set(Value.kReverse);
 }
+}
 
-
-  }
 
   @Override
   public void testInit()
