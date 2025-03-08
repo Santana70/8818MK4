@@ -236,13 +236,10 @@ Servo rightServo = new Servo(8);
 
     if(Driver.getPOV() == 0){
 
-      End = !End;
-  }  
-  if (End){
     
     Endsolenoid.set(Value.kForward);
    
-} else {
+} else if (Driver.getPOV() == 180) {
     Endsolenoid.set(Value.kReverse);
 }
     
@@ -274,17 +271,16 @@ Servo rightServo = new Servo(8);
     Ballsolenoid.set(Value.kReverse);
 }
 
-if(Operater.getPOV() == 0){
 
- ground = !ground;
-}  
-if (ground){
+
+if(Operater.getPOV() == 0){
 
 Armsolenoid.set(Value.kForward);
 
 } else if (Operater.getPOV() == 180){
 Armsolenoid.set(Value.kReverse);
 }
+
 }
 
 
